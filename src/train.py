@@ -1,4 +1,6 @@
 import argparse
+import os
+from datetime import datetime
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
@@ -75,7 +77,7 @@ Tuned Model Confusion Matrix:
         f.write(output)
 
 if __name__ == "__main__":
-    parser = argparser.ArgumentParser(description="Train Iris model with decision tree and K-nn")
+    parser = argparse.ArgumentParser(description="Train Iris model with decision tree and K-nn")
     parser.add_argument("--test-size", type=float, default=0.2, help='Test set proportion')
     parser.add_argument("--random-state", type=int, default=42, help="Random seed for reproducibilitiy")
     args = parser.parse_args()
