@@ -1,12 +1,27 @@
-# Iris Classifier (Decision Tree)
+# Iris Classifier
 
-## Overview
-End‑to‑end ML example from Digital Marketing Mastery Module → builds a decision‑tree classifier on the classic Iris dataset using scikit‑learn.
+This project trains and evaluates machine learning models on the classic Iris dataset. It uses both a Decision Tree and a K-Nearest Neighbors (K-NN) classifier to predict iris species and outputs model performance metrics and confusion matrices.
 
-## Quick start
+---
+
+## Features
+
+- Load and split the Iris dataset
+- Train Decision Tree and K-NN classifiers
+- Generate accuracy scores and confusion matrices for each model
+- Save trained models and results with timestamps
+- Save confusion matrix plots as PNG images
+
+---
+
+## Requirements
+
+- Python 3.7+
+- `scikit-learn`
+- `matplotlib`
+- `joblib`
+
+Install dependencies via:
+
 ```bash
-git clone https://github.com/suikedigital/iris-classifier.git
-cd iris-classifier
-python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-python src/train.py
+pip install scikit-learn matplotlib joblib
