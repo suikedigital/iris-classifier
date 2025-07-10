@@ -1,13 +1,39 @@
 import argparse
 import os
 from datetime import datetime
+import joblib
+import matplotlib.pyplot as plt
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
 
+outputs_dir = os.path.join(os.path.dirname(__file__),"../outputs")
+os.makedirs(outputs_dir, exist_ok=True)
+
+def return_timestamp():
+    return datetime.now().strftime("%Y%m%d_%H%M%S")
+
+def save_model(model):
+    filename = f"{outputs_dir}/iris_model_{return_timestamp()}.joblib"
+    joblib.dump(model, filename)
+
+def save_results(output):
+    filename = f"{outputs_dir}/iris_results_{return_timestamp()}.txt"
+
+    with open(filename, "w") as f:
+        f.write(output)
+
+def create_and_save_confusion_matrix_image(Y_Test, Y_Pred):
+    labels = ['Setosa', 'Versicolor', 'Virginica']
+    cm = confusion_matrix(Y_Test, Y_Pred)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=labels)
+    disp.plot(cmap='Blues', values_format='d')
+
+    filename = f"{outputs_dir}/confusion_matrix.png"
+    plt.savefig(filename)
+    plt.close()
 
 def main(test_size, random_state):
 
@@ -47,6 +73,7 @@ def main(test_size, random_state):
     Y_pred3 = model3.predict(X_test)
 
     confusion3 = confusion_matrix(Y_test, Y_pred3)
+    
 
     output = f"""
 Test Size: {test_size}
@@ -64,17 +91,12 @@ Tuned Model Accuracy: {accuracy_score(Y_test, Y_pred3)}
 Tuned Model Confusion Matrix:
 {confusion3}
     """
-    print(output)
 
-    # make sure the results directory exists
-    os.makedirs("results", exist_ok=True)
-
-    # create a unique filename for the results
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"results/iris_results_{timestamp}.txt"
-
-    with open(filename, "w") as f:
-        f.write(output)
+    save_results(output)
+    save_model(model)
+    # Create and save the final confusion matrix images
+    create_and_save_confusion_matrix_image(Y_test, Y_pred)
+ 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train Iris model with decision tree and K-nn")
