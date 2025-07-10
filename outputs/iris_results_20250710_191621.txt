@@ -1,22 +1,22 @@
 
 Test Size: 0.3
-Random State: 123
+Random State: 1
 
 Decision Tree Accuracy: 0.9555555555555556
 Confusion Matrix:
-[[18  0  0]
- [ 0 10  0]
- [ 0  2 15]]
+[[14  0  0]
+ [ 0 17  1]
+ [ 0  1 12]]
 
 K-NN Accuracy: 0.9777777777777777
 K-NN Confusion Matrix:
-[[18  0  0]
- [ 0  9  1]
- [ 0  0 17]]
+[[14  0  0]
+ [ 0 18  0]
+ [ 0  1 12]]
 
-Tuned Model Accuracy: 0.6222222222222222
+Tuned Model Accuracy: 0.6
 Tuned Model Confusion Matrix:
-[[18  0  0]
- [ 0 10  0]
- [ 0 17  0]]
+[[14  0  0]
+ [ 0  0 18]
+ [ 0  0 13]]
     
